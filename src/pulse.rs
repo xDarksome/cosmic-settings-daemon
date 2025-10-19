@@ -82,7 +82,9 @@ pub(crate) async fn pulse(
     let (tx, mut rx) = futures::channel::mpsc::channel(1);
     let (kill_tx, kill_rx) = futures::channel::oneshot::channel();
     _ = std::thread::spawn(move || {
-        pulse::thread(tx);
+        let _tx = tx;
+        // pulse::thread(tx);
+        std::thread::sleep(Duration::from_secs(3600));
         _ = kill_tx.send(());
     });
 
