@@ -430,7 +430,11 @@ pub enum Change {
 
 #[tokio::main(flavor = "current_thread")]
 async fn main() -> zbus::Result<()> {
-    env_logger::init();
+    // env_logger::init();
+
+    let mut logger_builder = env_logger::builder();
+    logger_builder.filter_level(log::LevelFilter::Info);
+    logger_builder.init();
 
     let (theme_cleanup_done_tx, mut theme_cleanup_done_rx) = tokio::sync::mpsc::channel(1);
     let (sigterm_tx, sigterm_rx) = tokio::sync::broadcast::channel(1);
