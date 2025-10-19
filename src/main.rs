@@ -414,6 +414,7 @@ async fn backlight_monitor_task(
                     }
                 }
                 socket.clear_ready();
+                tokio::time::sleep(std::time::Duration::from_secs(60)).await;
             }
         }
         Err(err) => log::error!("Error creating udev backlight monitor: {}", err),
